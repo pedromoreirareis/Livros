@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Livros</string>
+
+    <string name="hint_edt_busca">Pesquise o titulo ou autor</string>
+    <string name="msg_sem_retorno">Nenhum dado foi encontrado</string>
+    <string name="msg_sem_internet">Sem conexão com a internet</string>
+    <string name="descricao_img">Imagem de lupa no botão de pesquisa</string>
+</resources>
