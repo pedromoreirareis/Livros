@@ -2,7 +2,6 @@ package com.pedromoreirareisgmail.livros;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -48,6 +47,7 @@ public class Adapter extends ArrayAdapter<Livro> {
 
         // Atribui valor do objeto atual na view
         tvTitulo.setText(itemAtual != null ? itemAtual.getmTitulo() : null);
+
         tvAutor.setText(itemAtual != null ? itemAtual.getmAutor() : null);
 
         return convertView;

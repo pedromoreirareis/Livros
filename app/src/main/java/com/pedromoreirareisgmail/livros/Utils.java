@@ -34,7 +34,7 @@ public class Utils {
         try {
             dadosJSON = makeHttpRequest(urlRequisicao);
         } catch (IOException e) {
-            Log.e(TAG,"Erro na solicitação de dados",e);
+            Log.e(TAG, "Erro na solicitação de dados", e);
         }
 
         return extrairJSON(dadosJSON);
@@ -74,17 +74,17 @@ public class Utils {
                 inputStream = connection.getInputStream();
                 dadosJSON = leiaInputStream(inputStream);
             } else {
-               Log.e(TAG,"Erro na requisição de dados, Código:  " + connection.getResponseCode());
+                Log.e(TAG, "Erro na requisição de dados, Código:  " + connection.getResponseCode());
             }
 
         } catch (IOException e) {
-            Log.e(TAG,"Erro ao fazer a requisição de dados ou converter os dados JSON",e);
-        }finally {
-            if(connection != null){
+            Log.e(TAG, "Erro ao fazer a requisição de dados ou converter os dados JSON", e);
+        } finally {
+            if (connection != null) {
                 connection.disconnect();
             }
 
-            if(inputStream != null){
+            if (inputStream != null) {
                 inputStream.close();
             }
         }
@@ -118,25 +118,34 @@ public class Utils {
     private static List<Livro> extrairJSON(String dadosJSON) {
 
 
-        // Cria uma lista de livros
+        // Cria uma lista de livros vazia
         List<Livro> livros = new ArrayList<>();
 
         try {
 
-            // Pega os dados JSON e coloca em um objeto para tratamento
+            // Pega os dados JSON  em formato String
+            // e coloca em um objeto para tratamento
             JSONObject root = new JSONObject(dadosJSON);
 
-            // No objeto JSON, Verifica o Array principal, items
+            // Verifica a quantidade de itens que tem a resposta JSON
+            // Se for zero, retorna a lista vazia
+            if (root.getInt("totalItems") == 0) {
+                return livros;
+            }
+
+            // No objeto JSON, Verifica o Array principal, "items"
             JSONArray arrayItems = root.getJSONArray("items");
 
-            // Dentro do Array items, verifica todos os objetos pertencente
+            // Dentro do Array "items", verifica todos os objetos pertencente
             // a esse a Array para capturar os dados
+
             for (int i = 0; i < arrayItems.length(); i++) {
 
-                // Dentro do Array pega cada objeto
+                // Dentro do Array "Items" passa por todos os objetos "raiz"
+                // nesse objeto é que iremos capturar os dados
                 JSONObject livroAtual = arrayItems.getJSONObject(i);
 
-                // Esse objeto contem as informações sobre o livro
+                // Aqui encontraremos a informações sobre o livro
                 JSONObject volumeInfo = livroAtual.getJSONObject("volumeInfo");
 
                 // Titulo do livro
@@ -145,29 +154,18 @@ public class Utils {
                 // Esse Array contem o autor ou autores do livro
                 JSONArray arrayAuthors = volumeInfo.getJSONArray("authors");
 
-                //TODO: JSON Array Imagem e fazer Download
-
                 // Formatar os dados do Array de autor(es) colocando os
                 // autores separados por virgula
                 String authors = formatarAutor(arrayAuthors);
 
-                // Pega as descrição do livro, um pequeno texto com as
-                // principais informaçõe do livro
-                String description = volumeInfo.getString("description");
+                //TODO: JSON Array Imagem e fazer Download
 
-                // Informa a quantidade de paginas do livro ou revista
-                int pageCount = volumeInfo.getInt("pageCount");
-
-                // Informa se é um livro ou uma revista
-                String printType = formataTipo(volumeInfo.getString("printType"));
-
-
-                livros.add(new Livro(title, authors, description, printType, pageCount));
+                livros.add(new Livro(title, authors));
             }
 
 
         } catch (JSONException e) {
-            Log.e(TAG, "Erro ao capturar dados JSON", e);
+            Log.e(TAG, "Erro ao capturar dados JSON ", e);
         }
 
 
@@ -176,6 +174,10 @@ public class Utils {
 
     private static String formatarAutor(JSONArray arrayAutor) throws JSONException {
         String listaAutores = null;
+
+        if (arrayAutor.length() == 0) {
+            return null;
+        }
 
         for (int j = 0; j < arrayAutor.length(); j++) {
 
@@ -190,18 +192,5 @@ public class Utils {
 
         }
         return listaAutores;
-    }
-
-    private static String formataTipo(String type) {
-        String tipo = null;
-        switch (type) {
-            case "BOOK":
-                tipo = "Livro";
-                break;
-            case "MAGAZINE":
-                tipo = "Revista";
-                break;
-        }
-        return tipo;
     }
 }

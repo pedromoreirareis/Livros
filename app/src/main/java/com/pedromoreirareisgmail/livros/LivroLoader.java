@@ -10,8 +10,6 @@ public class LivroLoader extends AsyncTaskLoader<List<Livro>> {
 
     private String mUrl;
 
-
-
     public LivroLoader(Context context, String url) {
         super(context);
         mUrl = url;
@@ -28,9 +26,7 @@ public class LivroLoader extends AsyncTaskLoader<List<Livro>> {
         if(mUrl == null ){
             return null;
         }
-
-        List<Livro> livros = Utils.ComecarASyncTask(mUrl);
-        return livros;
+        return Utils.ComecarASyncTask(mUrl);
     }
 
     @Override
