@@ -4,45 +4,72 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="@dimen/margem_16"
-        android:paddingRight="@dimen/margem_16"
-        android:paddingTop="@dimen/margem_16">
+        android:background="@drawable/grad_layout"
+        android:orientation="vertical">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margem_16"
+            android:layout_marginLeft="@dimen/margem_16"
+            android:layout_marginRight="@dimen/margem_16"
+            android:layout_marginTop="@dimen/margem_16"
             android:orientation="horizontal">
 
             <EditText
                 android:id="@+id/et_pesquisa"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
+                android:background="@drawable/borda"
                 android:ellipsize="end"
                 android:hint="@string/hint_edt_busca"
                 android:imeOptions="actionSearch"
                 android:inputType="text|textAutoComplete|textAutoCorrect"
                 android:maxLines="1"
+                android:paddingEnd="@dimen/margem_16"
+                android:paddingLeft="@dimen/margem_16"
+                android:paddingRight="@dimen/margem_16"
+                android:paddingStart="@dimen/margem_16"
                 android:scrollHorizontally="true" />
 
             <ImageView
                 android:id="@+id/iv_pesquisa"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
+                android:layout_marginLeft="@dimen/margem_16"
+                android:layout_marginStart="@dimen/margem_16"
                 android:clickable="true"
                 android:contentDescription="@string/descricao_img"
                 android:src="@drawable/ic_search_black_48px" />
 
         </LinearLayout>
-        <ListView
-            android:id="@+id/list"
+
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            >
+            android:layout_height="match_parent">
 
-        </ListView>
+            <ListView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:divider="@null"
+                android:dividerHeight="0dp">
 
+            </ListView>
+
+            <TextView
+                android:id="@+id/tv_msg"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+
+            <ProgressBar
+                android:id="@+id/pb_progresso"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true" />
+        </RelativeLayout>
     </LinearLayout>
 </layout>
 

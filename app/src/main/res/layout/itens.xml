@@ -1,39 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:view_card="http://schemas.android.com/apk/res-auto">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
         <android.support.v7.widget.CardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/margem_16">
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margem_8"
+            android:layout_marginLeft="@dimen/margem_16"
+            android:layout_marginRight="@dimen/margem_16"
+            android:layout_marginTop="@dimen/margem_8"
+            view_card:cardCornerRadius="@dimen/margem_8"
+            view_card:cardElevation="@dimen/margem_16">
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:padding="@dimen/margem_16">
+                android:layout_height="wrap_content"
+                android:background="@drawable/grad_cardview"
+                android:orientation="horizontal"
+                android:paddingBottom="@dimen/margem_8"
+                android:paddingLeft="@dimen/margem_8"
+                android:paddingRight="@dimen/margem_8"
+                android:paddingTop="@dimen/margem_8">
 
                 <ImageView
                     android:id="@+id/iv_capa"
-                    android:layout_width="match_parent"
-                    android:layout_height="0dp"
-                    android:layout_weight="1" />
+                    android:layout_width="96dp"
+                    android:layout_height="144dp"
+                    android:contentDescription="@string/descricao_livro"
+                    android:scaleType="centerCrop" />
 
-                <TextView
-                    android:id="@+id/tv_titulo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margem_8"
+                    android:layout_marginRight="@dimen/margem_8"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/tv_autor"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    <TextView
+                        android:id="@+id/tv_titulo"
+                        style="@style/styleTitulo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <TextView
+                        android:id="@+id/tv_autor"
+                        style="@style/styleAutor"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/tv_tipo"
+                            style="@style/styleTipoPagina"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            android:id="@+id/tv_pagina"
+                            style="@style/styleTipoPagina"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/margem_8"
+                            android:layout_marginRight="@dimen/margem_8"
+                            android:gravity="end" />
+
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:id="@+id/tv_informacao"
+                        style="@style/styleInfo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" />
+                </LinearLayout>
             </LinearLayout>
-
         </android.support.v7.widget.CardView>
 
     </LinearLayout>

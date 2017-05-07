@@ -8,4 +8,40 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="styleTitulo">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/textColorPrincipal</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="styleAutor">
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textStyle">bold|italic</item>
+        <item name="android:layout_marginBottom">@dimen/margem_8</item>
+    </style>
+
+    <style name="styleTipoPagina">
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:layout_marginBottom">@dimen/margem_4</item>
+        <item name="android:textColor">@color/textColorDetalhesBranco</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+    <style name="styleInfo">
+        <item name="android:fontFamily">sans-serif-smallcaps</item>
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">@color/textColorDetalhesBranco</item>
+        <item name="android:maxLines">4</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+    </style>
+
+
 </resources>
