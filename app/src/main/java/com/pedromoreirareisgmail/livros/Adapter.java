@@ -15,7 +15,6 @@ import com.pedromoreirareisgmail.livros.databinding.ItensBinding;
 import com.squareup.picasso.Picasso;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Adapter extends ArrayAdapter<Livro> {
 
@@ -66,7 +65,7 @@ public class Adapter extends ArrayAdapter<Livro> {
         String linkImagem = (itemAtual != null ? itemAtual.getmImagem() : null);
 
         // Verifica se exite um link
-        if (Objects.equals(linkImagem, "sem_imagem")) {
+        if (linkImagem.equals("sem_imagem")) {
 
             ivCapa.setImageResource(R.drawable.sem_imagem);
         } else {

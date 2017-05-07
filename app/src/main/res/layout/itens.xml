@@ -38,7 +38,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/margem_8"
-                    android:layout_marginRight="@dimen/margem_8"
+                    android:layout_marginStart="@dimen/margem_8"
                     android:layout_weight="1"
                     android:orientation="vertical">
 
@@ -46,13 +46,15 @@
                         android:id="@+id/tv_titulo"
                         style="@style/styleTitulo"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:gravity="top" />
 
                     <TextView
                         android:id="@+id/tv_autor"
                         style="@style/styleAutor"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:gravity="top" />
 
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -64,7 +66,8 @@
                             style="@style/styleTipoPagina"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1" />
+                            android:layout_weight="1"
+                            android:gravity="top" />
 
                         <TextView
                             android:id="@+id/tv_pagina"
@@ -73,8 +76,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="@dimen/margem_8"
                             android:layout_marginRight="@dimen/margem_8"
-                            android:gravity="end" />
-
+                            android:gravity="end|top" />
 
                     </LinearLayout>
 

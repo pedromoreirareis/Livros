@@ -1,7 +1,7 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
@@ -10,6 +10,7 @@
 
     <style name="styleTitulo">
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:layout_gravity">top</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textColor">@color/textColorPrincipal</item>
         <item name="android:maxLines">1</item>
@@ -19,6 +20,7 @@
 
     <style name="styleAutor">
         <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:layout_gravity">top</item>
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>
         <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
@@ -28,6 +30,7 @@
 
     <style name="styleTipoPagina">
         <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:layout_gravity">top</item>
         <item name="android:layout_marginBottom">@dimen/margem_4</item>
         <item name="android:textColor">@color/textColorDetalhesBranco</item>
         <item name="android:ellipsize">end</item>
@@ -37,6 +40,7 @@
 
     <style name="styleInfo">
         <item name="android:fontFamily">sans-serif-condensed</item>
+        <item name="android:layout_gravity">top</item>
         <item name="android:ellipsize">end</item>
         <item name="android:textColor">@color/textColorDetalhesBranco</item>
         <item name="android:maxLines">4</item>

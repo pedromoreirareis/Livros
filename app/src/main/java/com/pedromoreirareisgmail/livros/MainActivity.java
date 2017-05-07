@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     private String mUrlRequisicao = null;
     private EditText mEtPesquisa;
     private Adapter mAdapter;
+    private Boolean mPesquisou = false;
 
     // Click na Imagem
     private final View.OnClickListener clickPesquisa = new View.OnClickListener() {
@@ -102,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         }
     }
 
-
     /**
      * Cria o Loader - ao criar lodaer mUrlRequisicao é null
      *
@@ -128,6 +128,11 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mAdapter.clear();
         if (livros != null && !livros.isEmpty()) {
             mAdapter.addAll(livros);
+        } else {
+            if (mPesquisou) {
+                mTvMensagem.setText(R.string.msg_sem_retorno);
+                mPesquisou = false;
+            }
         }
     }
 
@@ -154,7 +159,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mUrlRequisicao = "";
 
         // Limpa utlPesquisa
-        String urlPesquisa = "";
+        String urlPesquisa;
 
         // Pega texto edit, retira espaços inicio e fim e transforma em string
         urlPesquisa = mEtPesquisa.getText().toString().trim();
@@ -189,6 +194,9 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
                 // Deixa o mTvMensagem escondido
                 mTvMensagem.setVisibility(View.GONE);
+
+                // Foi passada uma url e iniciou pesquisa
+                mPesquisou = true;
             } else {
 
                 // Deixa o progressBar visivel

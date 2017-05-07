@@ -1,9 +1,9 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
     <string name="app_name">Livros</string>
 
-    <string name="hint_edt_busca">Pesquise o titulo ou autor</string>
+    <string name="hint_edt_busca" tools:ignore="Typos">Pesquise o titulo ou autor</string>
     <string name="msg_sem_internet">Sem conexão com a internet</string>
-    <string name="descricao_img">Imagem de lupa no botão de pesquisa</string>
+    <string name="msg_sem_retorno">A pesquisa não retornou resultado</string>
     <string name="descricao_livro">Imagem da capa do livro</string>
     <string name="but_pesquisa">pesquisar</string>
 </resources>

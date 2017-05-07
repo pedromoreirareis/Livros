@@ -8,10 +8,9 @@
     <color name="textColorPrincipal">#2B3D4D</color>
 
     <!-- Cor do texto para os detalhes -->
-    <color name="textColorDetalhes">#B4BAC0</color>
 
     <!-- Cor do texto para os detalhes branco -->
     <color name="textColorDetalhesBranco">#FFEEFF</color>
 
-
 </resources>
+

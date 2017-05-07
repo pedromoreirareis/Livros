@@ -10,16 +10,20 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margem_16"
-            android:layout_marginLeft="@dimen/margem_16"
-            android:layout_marginRight="@dimen/margem_16"
-            android:layout_marginTop="@dimen/margem_16"
-            android:orientation="horizontal">
+            android:background="@color/colorPrimary"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/margem_16"
+            android:paddingEnd="@dimen/margem_16"
+            android:paddingLeft="@dimen/margem_16"
+            android:paddingRight="@dimen/margem_16"
+            android:paddingStart="@dimen/margem_16"
+            android:paddingTop="@dimen/margem_16">
 
             <EditText
                 android:id="@+id/et_pesquisa"
                 android:layout_width="0dp"
                 android:layout_height="48dp"
+                android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:background="@drawable/borda"
                 android:ellipsize="end"
@@ -32,25 +36,33 @@
                 android:paddingLeft="@dimen/margem_16"
                 android:paddingRight="@dimen/margem_16"
                 android:paddingStart="@dimen/margem_16"
-                android:scrollHorizontally="true" />
+                android:scrollHorizontally="true"
+                android:textColor="@color/colorPrimaryDark"
+                android:textColorHint="@color/colorPrimary">
+
+
+            </EditText>
 
             <Button
                 android:id="@+id/but_pesquisa"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="@dimen/margem_16"
-                android:layout_marginStart="@dimen/margem_16"
-                android:background="@drawable/borda_but"
+                android:layout_marginLeft="@dimen/margem_8"
+                android:layout_marginStart="@dimen/margem_8"
+                android:background="@drawable/but_estado"
                 android:fontFamily="sans-serif-condensed"
                 android:gravity="center"
-                android:text="@string/but_pesquisa" />
+                android:text="@string/but_pesquisa"
+                android:textAllCaps="true"
+                android:textColor="@color/but_text_color" />
 
         </LinearLayout>
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:foreground="@drawable/borda_layout">
 
             <ListView
                 android:id="@+id/list"
