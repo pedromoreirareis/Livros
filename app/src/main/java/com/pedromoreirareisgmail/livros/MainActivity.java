@@ -209,7 +209,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             }
 
         } else {
-            Toast.makeText(MainActivity.this, "Digite texto a ser pesquisado.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, R.string.digite, Toast.LENGTH_SHORT).show();
         }
     }
 

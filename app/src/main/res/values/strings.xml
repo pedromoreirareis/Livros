@@ -6,4 +6,5 @@
     <string name="msg_sem_retorno">A pesquisa não retornou resultado</string>
     <string name="descricao_livro">Imagem da capa do livro</string>
     <string name="but_pesquisa">pesquisar</string>
+    <string name="digite">Digite texto a ser pesquisado.</string>
 </resources>
