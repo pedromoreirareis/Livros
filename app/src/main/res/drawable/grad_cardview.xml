@@ -4,8 +4,8 @@
         android:centerColor="#CFD8DC"
         android:centerX="0"
         android:centerY="0"
-        android:endColor="#B0BECF"
-        android:gradientRadius="300dp"
+        android:endColor="#90A4AC"
+        android:gradientRadius="180dp"
         android:startColor="#FFFFFF"
         android:type="radial">
 

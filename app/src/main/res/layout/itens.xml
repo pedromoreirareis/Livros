@@ -15,7 +15,7 @@
             android:layout_marginRight="@dimen/margem_16"
             android:layout_marginTop="@dimen/margem_8"
             view_card:cardCornerRadius="@dimen/margem_8"
-            view_card:cardElevation="@dimen/margem_16">
+            view_card:cardElevation="@dimen/margem_8">
 
             <LinearLayout
                 android:layout_width="match_parent"

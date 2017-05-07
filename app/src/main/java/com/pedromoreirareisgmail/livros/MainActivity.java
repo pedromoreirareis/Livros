@@ -11,8 +11,8 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -68,7 +68,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         // faz referencia as views no Layout principal - container
         mEtPesquisa = mBinding.etPesquisa;
         mTvMensagem = mBinding.tvMsg;
-        ImageView mivPesquisa = mBinding.ivPesquisa;
+        Button butPesquisa = mBinding.butPesquisa;
         ListView listView = mBinding.list;
 
         // se não tiver nada no ListView mostra esse TextView
@@ -81,7 +81,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         listView.setAdapter(mAdapter);
 
         // Ao clicar da imagem pesquisa chama evento de click
-        mivPesquisa.setOnClickListener(clickPesquisa);
+        butPesquisa.setOnClickListener(clickPesquisa);
 
         // Ao clicar icone pesquisa no teclado
         mEtPesquisa.setOnEditorActionListener(tecladoPesquisa);

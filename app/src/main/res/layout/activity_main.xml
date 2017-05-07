@@ -23,6 +23,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/borda"
                 android:ellipsize="end"
+                android:fontFamily="sans-serif-condensed"
                 android:hint="@string/hint_edt_busca"
                 android:imeOptions="actionSearch"
                 android:inputType="text|textAutoComplete|textAutoCorrect"
@@ -33,15 +34,17 @@
                 android:paddingStart="@dimen/margem_16"
                 android:scrollHorizontally="true" />
 
-            <ImageView
-                android:id="@+id/iv_pesquisa"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
+            <Button
+                android:id="@+id/but_pesquisa"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
                 android:layout_marginLeft="@dimen/margem_16"
                 android:layout_marginStart="@dimen/margem_16"
-                android:clickable="true"
-                android:contentDescription="@string/descricao_img"
-                android:src="@drawable/ic_search_black_48px" />
+                android:background="@drawable/borda_but"
+                android:fontFamily="sans-serif-condensed"
+                android:gravity="center"
+                android:text="@string/but_pesquisa" />
 
         </LinearLayout>
 
