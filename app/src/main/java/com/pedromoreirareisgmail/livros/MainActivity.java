@@ -24,8 +24,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<List<Livro>> {
 
-    private static final String URL_BASE = "https://www.googleapis.com/books/v1/volumes?q=";
-    private static final String URL_PARAMETROS = "&projection=full&maxResults=40&orderBy=relevance";
+
     private static final int LOADER_ID = 1;
     private ActivityMainBinding mBinding;
     private TextView mTvMensagem;
@@ -179,11 +178,10 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
             // Onde tiver espaço(os) substitui por +
             urlPesquisa = urlPesquisa.replaceAll("\\s+", "+");
 
-            // Junta URL_BASE + conteudo digita, já formatado + parametros de pesquisa
-            mUrlRequisicao = URL_BASE + urlPesquisa + URL_PARAMETROS;
-
             // Verifica se tem internet
             if (temInternet()) {
+                // Junta URL_BASE + conteudo digita, já formatado + parametros de pesquisa
+                mUrlRequisicao = urlPesquisa;
 
                 // reiniciar o loader para uma nova pesquisa
                 getLoaderManager().restartLoader(LOADER_ID, null, MainActivity.this);

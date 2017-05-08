@@ -33,7 +33,7 @@ public class LivroLoader extends AsyncTaskLoader<List<Livro>> {
         }
 
         // Se tiver uma url válida
-        return Utils.ComecarASyncTask(mUrl);
+        return Utils.comecarASyncTask(mUrl);
     }
 
 
