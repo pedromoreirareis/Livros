@@ -2,8 +2,12 @@ package com.pedromoreirareisgmail.livros;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +16,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedromoreirareisgmail.livros.databinding.ItensBinding;
-import com.squareup.picasso.Picasso;
 
+import java.io.IOException;
+import java.net.URL;
 import java.util.List;
 
 public class Adapter extends ArrayAdapter<Livro> {
@@ -62,13 +67,21 @@ public class Adapter extends ArrayAdapter<Livro> {
         // Salva o link da imagem em uma string
         String linkImagem = (itemAtual != null ? itemAtual.getmImagem() : null);
 
+
         //Verifica se exite um link
         if (linkImagem.equals("sem_imagem")) {
 
             holder.ivCapa.setImageResource(R.drawable.sem_imagem);
         } else {
             // Utiliza a biblioteca Picasso para baixar a imagem e colocar no ImagemView
-            Picasso.with(getContext()).load(linkImagem).into(holder.ivCapa);
+            //Picasso.with(getContext()).load(linkImagem).into(holder.ivCapa);
+
+            holder.ivCapa.setImageResource(R.drawable.sem_imagem);
+
+            holder.urlLink = linkImagem;
+
+            new DownloadImagemTask().execute(holder);
+
         }
 
 
@@ -82,6 +95,9 @@ public class Adapter extends ArrayAdapter<Livro> {
         TextView tvTipo;
         TextView tvInfo;
         ImageView ivCapa;
+        private String urlLink;
+        private Object bitmap;
+
 
         private ViewHolder(View view) {
             tvTitulo = mBinding.tvTitulo;
@@ -90,6 +106,38 @@ public class Adapter extends ArrayAdapter<Livro> {
             tvTipo = mBinding.tvTipo;
             tvInfo = mBinding.tvInformacao;
             ivCapa = mBinding.ivCapa;
+        }
+    }
+
+    private class DownloadImagemTask extends AsyncTask<ViewHolder, Void, ViewHolder> {
+
+
+        @Override
+        protected ViewHolder doInBackground(ViewHolder... url) {
+
+            ViewHolder holder = url[0];
+
+            try {
+                URL imagemURL = new URL(holder.urlLink);
+                holder.bitmap = BitmapFactory.decodeStream(imagemURL.openStream());
+
+            } catch (IOException e) {
+
+                Log.e(TAG, "Erro a baixar imagem", e);
+                holder.bitmap = null;
+            }
+
+
+            return holder;
+        }
+
+        @Override
+        protected void onPostExecute(ViewHolder resultado) {
+            if (resultado.bitmap == null) {
+                resultado.ivCapa.setImageResource(R.drawable.sem_imagem);
+            } else {
+                resultado.ivCapa.setImageBitmap((Bitmap) resultado.bitmap);
+            }
         }
     }
 

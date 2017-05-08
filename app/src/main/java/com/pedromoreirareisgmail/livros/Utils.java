@@ -76,7 +76,7 @@ public class Utils {
             connection = (HttpURLConnection) url.openConnection();
 
             // Paramentro tempo para conexao
-            connection.setConnectTimeout(5000);
+            connection.setConnectTimeout(10000);
 
             // Tempo de leitura
             connection.setReadTimeout(10000);
