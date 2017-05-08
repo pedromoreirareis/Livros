@@ -74,6 +74,8 @@ public class Extrair {
                 }
 
                 // Esse Array contem o autor ou autores do livro ou revista
+                // Pode ser utilizado optJSONArray e outros opt's quando o campo
+                // talvez não esteja preenchido ou não exista
                 if (volumeInfo.has("authors")) {
                     JSONArray arrayAuthors = volumeInfo.getJSONArray("authors");
 

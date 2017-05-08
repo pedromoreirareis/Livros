@@ -62,8 +62,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         mBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
 
         // Esconde barra de progresso
-        View progresso = mBinding.pbProgresso;
-        progresso.setVisibility(View.GONE);
+        semProgresso();
 
         // faz referencia as views no Layout principal - container
         mEtPesquisa = mBinding.etPesquisa;
@@ -91,12 +90,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Verifica se tem internet
         if (!temInternet()) {
-            // Esconde barra de progresso
-            progresso.setVisibility(View.GONE);
-
-            // Mostra mensagem informando que não tem internet
-            mTvMensagem.setText(R.string.msg_sem_internet);
-            mTvMensagem.setVisibility(View.VISIBLE);
+            semIternet();
         } else {
             mTvMensagem.setVisibility(View.GONE);
         }
@@ -197,13 +191,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
                 mPesquisou = true;
             } else {
 
-                // Deixa o progressBar visivel
-                View progresso = mBinding.pbProgresso;
-                progresso.setVisibility(View.GONE);
-
-                // Deixa o mTvMensagem visivel e mostra que tem internet
-                mTvMensagem.setText(R.string.msg_sem_internet);
-                mTvMensagem.setVisibility(View.VISIBLE);
+                semIternet();
             }
 
         } else {
@@ -222,5 +210,21 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         // Se internet estiver conectada e objeto não for nulo return true
         return (networkInfo != null && networkInfo.isConnected());
+    }
+
+    private void semIternet() {
+        // Deixa o progressBar visivel
+        View progresso = mBinding.pbProgresso;
+        progresso.setVisibility(View.GONE);
+
+        // Deixa o mTvMensagem visivel e mostra que tem internet
+        mTvMensagem.setText(R.string.msg_sem_internet);
+        mTvMensagem.setVisibility(View.VISIBLE);
+    }
+
+    private void semProgresso() {
+        // Esconde barra de progresso
+        View progresso = mBinding.pbProgresso;
+        progresso.setVisibility(View.GONE);
     }
 }
