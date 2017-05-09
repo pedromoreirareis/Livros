@@ -33,7 +33,7 @@ public class Adapter extends ArrayAdapter<Livro> {
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        ViewHolder holder;
+        MyViewHolder holder;
 
 
         // Verifica se existe uma View Disponivel
@@ -43,52 +43,58 @@ public class Adapter extends ArrayAdapter<Livro> {
             mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.itens, parent, false);
             convertView = mBinding.getRoot();
 
-            holder = new ViewHolder(convertView);
+            holder = new MyViewHolder(convertView);
 
             // Deixa uma nova View criada para ser utilizada
             convertView.setTag(holder);
+
         } else {
 
             // Reutiliza uma View se tiver disponivel
-            holder = (ViewHolder) convertView.getTag();
+            holder = (MyViewHolder) convertView.getTag();
         }
 
         // Pega a posição do objeto atual na lista de livro
         Livro itemAtual = getItem(position);
 
+        // Verifica se existe a posição atual em Livro
+        if (itemAtual != null) {
 
-        // Atribui valor do objeto atual na view
-        holder.tvTitulo.setText(itemAtual != null ? itemAtual.getmTitulo() : null);
-        holder.tvAutor.setText(itemAtual != null ? itemAtual.getmAutor() : null);
-        holder.tvPag.setText(itemAtual != null ? itemAtual.getmPag() : null);
-        holder.tvTipo.setText(itemAtual != null ? itemAtual.getmTipo() : null);
-        holder.tvInfo.setText(itemAtual != null ? itemAtual.getmInfo() : null);
+            // Atribui valor do objeto atual na view
+            holder.tvTitulo.setText(itemAtual.getmTitulo());
+            holder.tvAutor.setText(itemAtual.getmAutor());
+            holder.tvPag.setText(itemAtual.getmPag());
+            holder.tvTipo.setText(itemAtual.getmTipo());
+            holder.tvInfo.setText(itemAtual.getmInfo());
+            String linkImagem = (itemAtual.getmImagem());
 
-        // Salva o link da imagem em uma string
-        String linkImagem = (itemAtual != null ? itemAtual.getmImagem() : null);
+            //Verifica se não exite um link
+            if (linkImagem.equals("sem_imagem")) {
 
+                // Não existindo coloca a imagem "Sem Imagem"
+                holder.ivCapa.setImageResource(R.drawable.sem_imagem);
 
-        //Verifica se exite um link
-        if (linkImagem.equals("sem_imagem")) {
+            } else {
 
-            holder.ivCapa.setImageResource(R.drawable.sem_imagem);
-        } else {
-            // Utiliza a biblioteca Picasso para baixar a imagem e colocar no ImagemView
-            //Picasso.with(getContext()).load(linkImagem).into(holder.ivCapa);
+                // Se existir, primeiro coloca a Imagem "Sem Imagem"
+                holder.ivCapa.setImageResource(R.drawable.sem_imagem);
 
-            holder.ivCapa.setImageResource(R.drawable.sem_imagem);
+                // O holder urlLink recebe o link da imagem
+                holder.urlLink = linkImagem;
 
-            holder.urlLink = linkImagem;
-
-            new DownloadImagemTask().execute(holder);
-
+                // Inicia o Downoad da imagem
+                new DownloadImagemTask().execute(holder);
+            }
         }
-
 
         return convertView;
     }
 
-    private class ViewHolder {
+
+    /**
+     * Criando a classe ViewHolder
+     */
+    private class MyViewHolder {
         TextView tvTitulo;
         TextView tvAutor;
         TextView tvPag;
@@ -98,8 +104,8 @@ public class Adapter extends ArrayAdapter<Livro> {
         private String urlLink;
         private Object bitmap;
 
-
-        private ViewHolder(View view) {
+        // Contrutor ViewHolder recebendo as referencia da View
+        private MyViewHolder(View view) {
             tvTitulo = mBinding.tvTitulo;
             tvAutor = mBinding.tvAutor;
             tvPag = mBinding.tvPagina;
@@ -109,21 +115,35 @@ public class Adapter extends ArrayAdapter<Livro> {
         }
     }
 
-    private class DownloadImagemTask extends AsyncTask<ViewHolder, Void, ViewHolder> {
+    /**
+     * ASyncTask para download da imagens da capa do livro
+     */
+    private class DownloadImagemTask extends AsyncTask<MyViewHolder, Void, MyViewHolder> {
 
 
         @Override
-        protected ViewHolder doInBackground(ViewHolder... url) {
+        protected MyViewHolder doInBackground(MyViewHolder... url) {
 
-            ViewHolder holder = url[0];
+            // Cria um novo holder e recebe
+            // a url da imagem a ser baixada
+            MyViewHolder holder = url[0];
 
             try {
+
+                // A partir da url String cria um Objeto URL
                 URL imagemURL = new URL(holder.urlLink);
+
+                // Objeto bitmap -
+                // BitmapFactory - Cria um objeto Bitmap, monta os Stream decodificado
+                // decodeStream  - decodifica Stream, para colocar no Bitmap
+                // openStream    - Abre uma conexao com a url e retorna os Stream para leitura
                 holder.bitmap = BitmapFactory.decodeStream(imagemURL.openStream());
 
             } catch (IOException e) {
 
                 Log.e(TAG, "Erro a baixar imagem", e);
+
+                // Se tiver alguns erro o bitmap recebe null
                 holder.bitmap = null;
             }
 
@@ -132,10 +152,12 @@ public class Adapter extends ArrayAdapter<Livro> {
         }
 
         @Override
-        protected void onPostExecute(ViewHolder resultado) {
-            if (resultado.bitmap == null) {
-                resultado.ivCapa.setImageResource(R.drawable.sem_imagem);
-            } else {
+        protected void onPostExecute(MyViewHolder resultado) {
+
+            // erifica se retornou diferente de null
+            if (resultado.bitmap != null) {
+
+                // Se sim coloca a imagem no ImageView
                 resultado.ivCapa.setImageBitmap((Bitmap) resultado.bitmap);
             }
         }
