@@ -82,7 +82,7 @@ public class Adapter extends ArrayAdapter<Livro> {
                 // O holder urlLink recebe o link da imagem
                 holder.urlLink = linkImagem;
 
-                // Inicia o Downoad da imagem
+                // Inicia o Downoad da imagem - Utilizando ASyncTask
                 new DownloadImagemTask().execute(holder);
             }
         }
