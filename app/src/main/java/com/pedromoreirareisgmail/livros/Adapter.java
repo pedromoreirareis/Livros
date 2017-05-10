@@ -2,12 +2,8 @@ package com.pedromoreirareisgmail.livros;
 
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,9 +12,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.pedromoreirareisgmail.livros.databinding.ItensBinding;
+import com.squareup.picasso.Picasso;
 
-import java.io.IOException;
-import java.net.URL;
 import java.util.List;
 
 public class Adapter extends ArrayAdapter<Livro> {
@@ -41,11 +36,14 @@ public class Adapter extends ArrayAdapter<Livro> {
 
             // Infla uma nova View
             mBinding = DataBindingUtil.inflate(LayoutInflater.from(getContext()), R.layout.itens, parent, false);
+
+            // Coloca a View inflada pelo Binding no convertView
             convertView = mBinding.getRoot();
 
+            // Atribui ao ViewHolder a gerencia de referencias dentro da View Inflada
             holder = new MyViewHolder(convertView);
 
-            // Deixa uma nova View criada para ser utilizada
+            // Deixa uma nova View criada para ser utilizada e gerenciada pelo ViewHolder
             convertView.setTag(holder);
 
         } else {
@@ -76,20 +74,13 @@ public class Adapter extends ArrayAdapter<Livro> {
 
             } else {
 
-                // Se existir, primeiro coloca a Imagem "Sem Imagem"
-                holder.ivCapa.setImageResource(R.drawable.sem_imagem);
-
-                // O holder urlLink recebe o link da imagem
-                holder.urlLink = linkImagem;
-
-                // Inicia o Downoad da imagem - Utilizando ASyncTask
-                new DownloadImagemTask().execute(holder);
+                // Utiliza a Lib Picasso para fazer Download e Cache da Imagem
+                Picasso.with(getContext()).load(linkImagem).into(holder.ivCapa);
             }
         }
 
         return convertView;
     }
-
 
     /**
      * Criando a classe ViewHolder
@@ -114,53 +105,4 @@ public class Adapter extends ArrayAdapter<Livro> {
             ivCapa = mBinding.ivCapa;
         }
     }
-
-    /**
-     * ASyncTask para download da imagens da capa do livro
-     */
-    private class DownloadImagemTask extends AsyncTask<MyViewHolder, Void, MyViewHolder> {
-
-
-        @Override
-        protected MyViewHolder doInBackground(MyViewHolder... url) {
-
-            // Cria um novo holder e recebe
-            // a url da imagem a ser baixada
-            MyViewHolder holder = url[0];
-
-            try {
-
-                // A partir da url String cria um Objeto URL
-                URL imagemURL = new URL(holder.urlLink);
-
-                // Objeto bitmap -
-                // BitmapFactory - Cria um objeto Bitmap, monta os Stream decodificado
-                // decodeStream  - decodifica Stream, para colocar no Bitmap
-                // openStream    - Abre uma conexao com a url e retorna os Stream para leitura
-                holder.bitmap = BitmapFactory.decodeStream(imagemURL.openStream());
-
-            } catch (IOException e) {
-
-                Log.e(TAG, "Erro a baixar imagem", e);
-
-                // Se tiver alguns erro o bitmap recebe null
-                holder.bitmap = null;
-            }
-
-
-            return holder;
-        }
-
-        @Override
-        protected void onPostExecute(MyViewHolder resultado) {
-
-            // erifica se retornou diferente de null
-            if (resultado.bitmap != null) {
-
-                // Se sim coloca a imagem no ImageView
-                resultado.ivCapa.setImageBitmap((Bitmap) resultado.bitmap);
-            }
-        }
-    }
-
 }
